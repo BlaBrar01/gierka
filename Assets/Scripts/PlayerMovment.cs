@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
-    [SerializeField] private float accerelate = 10;
+    [SerializeField] protected static float accerelate = 6;
+    protected static float currentAccerelate = accerelate;
     public Rigidbody2D body;
     public Animator animator;
+    protected bool touchesFloor = true;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -14,8 +17,8 @@ public class PlayerMovment : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontalInput * accerelate, body.velocity.y);
-        animator.SetFloat("Acceleration", Mathf.Abs(horizontalInput * accerelate));
+        body.velocity = new Vector2(horizontalInput * currentAccerelate, body.velocity.y);
+        animator.SetFloat("Acceleration", Mathf.Abs(horizontalInput * currentAccerelate));
         //flipping player sprite 
         if (horizontalInput > 0.01f)
             transform.localScale = Vector3.one;
@@ -24,12 +27,39 @@ public class PlayerMovment : MonoBehaviour
         //
 
         //jump
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && touchesFloor == true)
         {
-            body.velocity = new Vector2(body.velocity.x, accerelate);
+            touchesFloor = false;
+            body.velocity = new Vector2(body.velocity.x, currentAccerelate);
         }
+
         //
-
-
     }
+     void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.name == "Floor") {
+            touchesFloor = true;
+            animator.SetBool("inAir", false);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.name == "BarrelLimeCutsceneCollider")
+        {
+            currentAccerelate = 0;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+
+        if (collider.gameObject.name == "Floor") {
+            touchesFloor = false;
+            animator.SetBool("inAir", true); 
+        }
+        if (collider.gameObject.name == "BarrelLimeCutsceneCollider")
+        {
+            currentAccerelate = accerelate;
+        }
+    }
+
 }

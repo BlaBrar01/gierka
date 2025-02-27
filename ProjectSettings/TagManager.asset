@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Background
   - Floor
+  - Interactable
+  - Doors
+  - Barrel/Lime
+  - Lime
+  - Enemies
+  - EnemyHealthBar
   layers:
   - Default
   - TransparentFX
@@ -13,16 +19,16 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - HealthBarsEnemy
+  - InFrontOfPlayer
   - Player
   - Objects
-  - background
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background1st
+  - Background2nd
+  - Background3rd
+  - Enemies
+  - Corpses
+  - Particle
   - 
   - 
   - 
@@ -43,8 +49,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: HealthBars
+    uniqueID: 3189046315
+    locked: 0
+  - name: InFrontOfPlayer
+    uniqueID: 2677904265
+    locked: 0
   - name: Player
     uniqueID: 4223754645
+    locked: 0
+  - name: Enemies
+    uniqueID: 1115388157
+    locked: 0
+  - name: Corpses
+    uniqueID: 1937079793
     locked: 0
   - name: Objects
     uniqueID: 3664063791
@@ -54,4 +72,7 @@ TagManager:
     locked: 0
   - name: TextBox
     uniqueID: 2473121943
+    locked: 0
+  - name: 3rdBackGroundLight
+    uniqueID: 1473498411
     locked: 0
